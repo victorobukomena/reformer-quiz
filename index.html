@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Kind of Public Sector Reformer Are You?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .start-form {
+            text-align: center;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #4facfe;
+        }
+        
+        .question {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .question.active {
+            display: block;
+        }
+        
+        .question h2 {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #4facfe;
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            background: #4facfe;
+            color: white;
+            border-color: #4facfe;
+        }
+        
+        .progress {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+        
+        .result.active {
+            display: block;
+        }
+        
+        .result-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .result h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .result-traits {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        
+        .result-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        
+        .programme-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .programme-section h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        
+        .programme-section p {
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: #4facfe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .share-badge {
+            background: #f8f9fa;
+            border: 2px dashed #4facfe;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .share-badge h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .option {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>What Kind of Public Sector Reformer Are You?</h1>
+            <p>Discover your reform personality and find your perfect AIG programme match!</p>
+        </div>
+        
+        <div class="content">
+            <!-- Start Form -->
+            <div id="startForm" class="start-form">
+                <div class="input-group">
+                    <label for="userName">Your Name</label>
+                    <input type="text" id="userName" placeholder="Enter your full name" required>
+                </div>
+                <div class="input-group">
+                    <label for="userEmail">Your Email</label>
+                    <input type="email" id="userEmail" placeholder="Enter your email address" required>
+                </div>
+                <button class="btn" onclick="startQuiz()">Start Quiz!</button>
+            </div>
+            
+            <!-- Quiz Questions -->
+            <div id="quizContainer" style="display: none;">
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                
+                <div class="question active" id="q1">
+                    <h2>When you wake up on Monday, what's your first reform thought?</h2>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(1, 'A')">
+                            "How can we align policy with real impact?"
+                        </div>
+                        <div class="option" onclick="selectOption(1, 'B')">
+                            "Let's energise the team and deliver this week!"
+                        </div>
+                        <div class="option" onclick="selectOption(1, 'C')">
+                            "Time to move this Ministry forward."
+                        </div>
+                        <div class="option" onclick="selectOption(1, 'D')">
+                            "What's not working, and how do we fix it?"
+                        </div>
+                        <div class="option" onclick="selectOption(1, 'E')">
+                            "Let's tweak the plan—we need a custom solution."
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question" id="q2">
+                    <h2>If your work were a movie, the title would be...</h2>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(2, 'A')">
+                            "Masterminds of Reform"
+                        </div>
+                        <div class="option" onclick="selectOption(2, 'B')">
+                            "Lead with Heart"
+                        </div>
+                        <div class="option" onclick="selectOption(2, 'C')">
+                            "The Strategist's Playbook"
+                        </div>
+                        <div class="option" onclick="selectOption(2, 'D')">
+                            "Mission: Implementation"
+                        </div>
+                        <div class="option" onclick="selectOption(2, 'E')">
+                            "No One-Size Fits All"
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question" id="q3">
+                    <h2>Your reform toolkit includes...</h2>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(3, 'A')">
+                            Policy briefs, impact reports, system maps
+                        </div>
+                        <div class="option" onclick="selectOption(3, 'B')">
+                            Performance dashboards, team check-ins
+                        </div>
+                        <div class="option" onclick="selectOption(3, 'C')">
+                            Stakeholder memos, steering committee meetings
+                        </div>
+                        <div class="option" onclick="selectOption(3, 'D')">
+                            SOPs, timelines, project trackers
+                        </div>
+                        <div class="option" onclick="selectOption(3, 'E')">
+                            A whiteboard, creative thinking, and no fear of the unknown
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question" id="q4">
+                    <h2>In meetings, you're most likely to say...</h2>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(4, 'A')">
+                            "Let's align this with national goals."
+                        </div>
+                        <div class="option" onclick="selectOption(4, 'B')">
+                            "How's the team doing on this?"
+                        </div>
+                        <div class="option" onclick="selectOption(4, 'C')">
+                            "This needs executive backing."
+                        </div>
+                        <div class="option" onclick="selectOption(4, 'D')">
+                            "We can do this better and faster."
+                        </div>
+                        <div class="option" onclick="selectOption(4, 'E')">
+                            "Let's try something new—it doesn't have to be traditional."
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question" id="q5">
+                    <h2>What best describes your reform style in one word?</h2>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(5, 'A')">
+                            <strong>Strategic</strong> — I see patterns, build frameworks, and align policies.
+                        </div>
+                        <div class="option" onclick="selectOption(5, 'B')">
+                            <strong>Empowering</strong> — I coach, motivate, and lift my team to perform.
+                        </div>
+                        <div class="option" onclick="selectOption(5, 'C')">
+                            <strong>Visionary</strong> — I think big, lead from the front, and shape institutions.
+                        </div>
+                        <div class="option" onclick="selectOption(5, 'D')">
+                            <strong>Efficient</strong> — I streamline processes and make things work better.
+                        </div>
+                        <div class="option" onclick="selectOption(5, 'E')">
+                            <strong>Adaptive</strong> — I think on my feet, tailor solutions, and thrive in uncertainty.
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn" onclick="previousQuestion()" id="prevBtn" style="display: none;">Previous</button>
+                    <button class="btn" onclick="nextQuestion()" id="nextBtn" disabled>Next Question</button>
+                </div>
+            </div>
+            
+            <!-- Results -->
+            <div id="results" class="result">
+                <div id="resultContent"></div>
+                
+                <div class="social-icons">
+                    <a href="#" class="social-icon" title="LinkedIn">💼</a>
+                    <a href="#" class="social-icon" title="Twitter">🐦</a>
+                    <a href="#" class="social-icon" title="Facebook">📘</a>
+                    <a href="#" class="social-icon" title="Instagram">📸</a>
+                </div>
+                
+                <div class="share-badge">
+                    <h4>Share Your Result!</h4>
+                    <p>Screenshot this result or <span id="shareText" style="color: #4facfe; font-weight: bold;"></span></p>
+                </div>
+                
+                <button class="btn" onclick="restartQuiz()">Take Quiz Again</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentQuestion = 1;
+        let answers = {};
+        let userName = '';
+        let userEmail = '';
+        
+        const reformerTypes = {
+            A: {
+                name: "The Policy Architect",
+                icon: "🏗️",
+                traits: "Strategic. Analytical. Vision-driven.",
+                description: "You see the big picture and build blueprints that can reshape systems. You're drawn to public policy and data-driven reform, and believe real change starts with well-crafted strategy.",
+                programme: "AIG MPP Scholarship",
+                programmeDescription: "Spend a year at the University of Oxford refining your policy thinking, learning from global experts, and returning equipped to shape Nigeria's future."
+            },
+            B: {
+                name: "The Transformational Leader",
+                icon: "⭐",
+                traits: "Inspiring. Collaborative. Purpose-led.",
+                description: "You lead from the heart and believe that people impact change. Whether you're heading a team or managing a project, you know how to get the best out of people—and push progress forward.",
+                programme: "AIG Public Leaders Programme (PLP)",
+                programmeDescription: "This executive training is made for leaders like you—equipping you with tools to lead teams, scale reform, and become part of a continental network of change agents."
+            },
+            C: {
+                name: "The Visionary Strategist",
+                icon: "🎯",
+                traits: "Commanding. Forward-thinking. System-wide impact.",
+                description: "You're the leader others look to when bold moves are needed. You see beyond the day-to-day and influence at the highest levels to shift systems and institutions toward transformation.",
+                programme: "AIG Fellowships or Senior Leaders Programme",
+                programmeDescription: "Join top-tier public sector executives in mastering policy implementation, leadership strategy, and national transformation."
+            },
+            D: {
+                name: "The Operational Reformer",
+                icon: "⚙️",
+                traits: "Practical. Process-minded. Results-driven.",
+                description: "You're the engine of reform—optimising systems, improving delivery, and making the public service work better for citizens. You care less about talk and more about what gets done.",
+                programme: "LEAD-P (Leadership Enhancement and Development Programme)",
+                programmeDescription: "Designed for civil servants like you who want to sharpen execution skills and lead everyday transformation."
+            },
+            E: {
+                name: "The Custom-Fit Reformer",
+                icon: "🎨",
+                traits: "Flexible. Creative. Context-smart.",
+                description: "You don't follow templates—you make them. You know every MDA has its own story, and you believe in building solutions that match reality, not theory.",
+                programme: "Custom Training for Public Institutions",
+                programmeDescription: "Get access to tailored learning experiences built around your ministry's unique reform goals."
+            }
+        };
+        
+        function startQuiz() {
+            userName = document.getElementById('userName').value.trim();
+            userEmail = document.getElementById('userEmail').value.trim();
+            
+            if (!userName || !userEmail) {
+                alert('Please enter both your name and email to continue.');
+                return;
+            }
+            
+            document.getElementById('startForm').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+            updateProgress();
+        }
+        
+        function selectOption(questionNum, option) {
+            // Remove previous selection
+            const currentQ = document.getElementById(`q${questionNum}`);
+            const options = currentQ.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selection to clicked option
+            event.target.classList.add('selected');
+            
+            // Store answer
+            answers[questionNum] = option;
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < 5) {
+                document.getElementById(`q${currentQuestion}`).classList.remove('active');
+                currentQuestion++;
+                document.getElementById(`q${currentQuestion}`).classList.add('active');
+                
+                // Update buttons
+                document.getElementById('prevBtn').style.display = currentQuestion > 1 ? 'inline-block' : 'none';
+                document.getElementById('nextBtn').disabled = !answers[currentQuestion];
+                
+                if (currentQuestion === 5) {
+                    document.getElementById('nextBtn').textContent = 'Get My Results!';
+                }
+                
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+        
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                document.getElementById(`q${currentQuestion}`).classList.remove('active');
+                currentQuestion--;
+                document.getElementById(`q${currentQuestion}`).classList.add('active');
+                
+                document.getElementById('prevBtn').style.display = currentQuestion > 1 ? 'inline-block' : 'none';
+                document.getElementById('nextBtn').disabled = false;
+                document.getElementById('nextBtn').textContent = currentQuestion === 5 ? 'Get My Results!' : 'Next Question';
+                
+                updateProgress();
+            }
+        }
+        
+        function updateProgress() {
+            const progress = (currentQuestion / 5) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function calculateResult() {
+            const scores = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+            
+            // Count responses for each type
+            Object.values(answers).forEach(answer => {
+                scores[answer]++;
+            });
+            
+            // Find the type with highest score
+            return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        }
+        
+        function showResults() {
+            const resultType = calculateResult();
+            const result = reformerTypes[resultType];
+            
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('results').classList.add('active');
+            
+            const resultContent = `
+                <div class="result-icon">${result.icon}</div>
+                <h2>You Are: ${result.name}</h2>
+                <div class="result-traits">${result.traits}</div>
+                <div class="result-description">${result.description}</div>
+                
+                <div class="programme-section">
+                    <h3>Recommended Programme:</h3>
+                    <h3>${result.programme}</h3>
+                    <p>${result.programmeDescription}</p>
+                    <br>
+                    <button class="btn" style="background: white; color: #667eea;">Learn More About This Programme</button>
+                    <button class="btn" style="background: rgba(255,255,255,0.2); border: 2px solid white;">Download Brochure</button>
+                </div>
+                
+                <p><em>We've emailed your personalised result and programme details to ${userEmail}</em></p>
+            `;
+            
+            document.getElementById('resultContent').innerHTML = resultContent;
+            document.getElementById('shareText').textContent = `"I'm ${result.name}!"`;
+        }
+        
+        function restartQuiz() {
+            currentQuestion = 1;
+            answers = {};
+            userName = '';
+            userEmail = '';
+            
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('startForm').style.display = 'block';
+            document.getElementById('userName').value = '';
+            document.getElementById('userEmail').value = '';
+            
+            // Reset all questions
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`q${i}`).classList.remove('active');
+                const options = document.getElementById(`q${i}`).querySelectorAll('.option');
+                options.forEach(opt => opt.classList.remove('selected'));
+            }
+            
+            document.getElementById('q1').classList.add('active');
+            document.getElementById('nextBtn').disabled = true;
+            document.getElementById('nextBtn').textContent = 'Next Question';
+            document.getElementById('prevBtn').style.display = 'none';
+            updateProgress();
+        }
+    </script>
+</body>
+</html>
