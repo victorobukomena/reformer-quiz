@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #373737 0%, #86271c 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -28,7 +28,7 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #f94b01 0%, #86271c 100%);
             color: white;
             padding: 40px 30px;
             text-align: center;
@@ -76,7 +76,7 @@
         
         .input-group input:focus {
             outline: none;
-            border-color: #4facfe;
+            border-color: #f94b01;
         }
         
         .question {
@@ -112,15 +112,15 @@
         }
         
         .option:hover {
-            background: #e3f2fd;
-            border-color: #4facfe;
+            background: #ffeee8;
+            border-color: #f94b01;
             transform: translateY(-2px);
         }
         
         .option.selected {
-            background: #4facfe;
+            background: #f94b01;
             color: white;
-            border-color: #4facfe;
+            border-color: #f94b01;
         }
         
         .progress {
@@ -132,14 +132,14 @@
         }
         
         .progress-bar {
-            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            background: linear-gradient(90deg, #f94b01, #86271c);
             height: 100%;
             width: 0%;
             transition: width 0.3s;
         }
         
         .btn {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #f94b01 0%, #86271c 100%);
             color: white;
             border: none;
             padding: 15px 30px;
@@ -197,7 +197,7 @@
         }
         
         .programme-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #373737 0%, #86271c 100%);
             color: white;
             padding: 30px;
             border-radius: 15px;
@@ -224,7 +224,7 @@
         .social-icon {
             width: 50px;
             height: 50px;
-            background: #4facfe;
+            background: #f94b01;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -240,7 +240,7 @@
         
         .share-badge {
             background: #f8f9fa;
-            border: 2px dashed #4facfe;
+            border: 2px dashed #f94b01;
             border-radius: 10px;
             padding: 20px;
             margin-top: 30px;
@@ -431,7 +431,7 @@
                 
                 <div class="share-badge">
                     <h4>Share Your Result!</h4>
-                    <p>Screenshot this result or <span id="shareText" style="color: #4facfe; font-weight: bold;"></span></p>
+                    <p>Screenshot this result or <span id="shareText" style="color: #f94b01; font-weight: bold;"></span></p>
                 </div>
                 
                 <button class="btn" onclick="restartQuiz()">Take Quiz Again</button>
@@ -452,7 +452,9 @@
                 traits: "Strategic. Analytical. Vision-driven.",
                 description: "You see the big picture and build blueprints that can reshape systems. You're drawn to public policy and data-driven reform, and believe real change starts with well-crafted strategy.",
                 programme: "AIG MPP Scholarship",
-                programmeDescription: "Spend a year at the University of Oxford refining your policy thinking, learning from global experts, and returning equipped to shape Nigeria's future."
+                programmeDescription: "Spend a year at the University of Oxford refining your policy thinking, learning from global experts, and returning equipped to shape Nigeria's future.",
+                learnMoreLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government/the-aig-scholarship",
+                brochureLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government/the-aig-scholarship"
             },
             B: {
                 name: "The Transformational Leader",
@@ -460,7 +462,9 @@
                 traits: "Inspiring. Collaborative. Purpose-led.",
                 description: "You lead from the heart and believe that people impact change. Whether you're heading a team or managing a project, you know how to get the best out of people—and push progress forward.",
                 programme: "AIG Public Leaders Programme (PLP)",
-                programmeDescription: "This executive training is made for leaders like you—equipping you with tools to lead teams, scale reform, and become part of a continental network of change agents."
+                programmeDescription: "This executive training is made for leaders like you—equipping you with tools to lead teams, scale reform, and become part of a continental network of change agents.",
+                learnMoreLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government/aig-public-leaders-programme",
+                brochureLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government/aig-public-leaders-programme"
             },
             C: {
                 name: "The Visionary Strategist",
@@ -468,7 +472,12 @@
                 traits: "Commanding. Forward-thinking. System-wide impact.",
                 description: "You're the leader others look to when bold moves are needed. You see beyond the day-to-day and influence at the highest levels to shift systems and institutions toward transformation.",
                 programme: "AIG Fellowships or Senior Leaders Programme",
-                programmeDescription: "Join top-tier public sector executives in mastering policy implementation, leadership strategy, and national transformation."
+                programmeDescription: "Join top-tier public sector executives in mastering policy implementation, leadership strategy, and national transformation.",
+                learnMoreLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government/aig-fellowship",
+                brochureLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government",
+                hasMultipleLinks: true,
+                secondaryLinkText: "Senior Leaders Programme",
+                secondaryLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government"
             },
             D: {
                 name: "The Operational Reformer",
@@ -476,7 +485,9 @@
                 traits: "Practical. Process-minded. Results-driven.",
                 description: "You're the engine of reform—optimising systems, improving delivery, and making the public service work better for citizens. You care less about talk and more about what gets done.",
                 programme: "LEAD-P (Leadership Enhancement and Development Programme)",
-                programmeDescription: "Designed for civil servants like you who want to sharpen execution skills and lead everyday transformation."
+                programmeDescription: "Designed for civil servants like you who want to sharpen execution skills and lead everyday transformation.",
+                learnMoreLink: "https://www.aigimoukhuedefoundation.org/public-sector-internship",
+                brochureLink: "https://www.aigimoukhuedefoundation.org/public-sector-internship"
             },
             E: {
                 name: "The Custom-Fit Reformer",
@@ -484,7 +495,9 @@
                 traits: "Flexible. Creative. Context-smart.",
                 description: "You don't follow templates—you make them. You know every MDA has its own story, and you believe in building solutions that match reality, not theory.",
                 programme: "Custom Training for Public Institutions",
-                programmeDescription: "Get access to tailored learning experiences built around your ministry's unique reform goals."
+                programmeDescription: "Get access to tailored learning experiences built around your ministry's unique reform goals.",
+                learnMoreLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government",
+                brochureLink: "https://www.aigimoukhuedefoundation.org/developing-leaders-in-government"
             }
         };
         
@@ -576,6 +589,16 @@
             document.getElementById('quizContainer').style.display = 'none';
             document.getElementById('results').classList.add('active');
             
+            let buttonsHtml = `
+                <a href="${result.learnMoreLink}" target="_blank" class="btn" style="background: white; color: #86271c; text-decoration: none; display: inline-block;">Learn More About This Programme</a>
+                <a href="${result.brochureLink}" target="_blank" class="btn" style="background: rgba(255,255,255,0.2); border: 2px solid white; text-decoration: none; display: inline-block;">Download Brochure</a>
+            `;
+            
+            // Add additional button for Visionary Strategist with multiple options
+            if (result.hasMultipleLinks) {
+                buttonsHtml += `<br><a href="${result.secondaryLink}" target="_blank" class="btn" style="background: rgba(255,255,255,0.2); border: 2px solid white; text-decoration: none; display: inline-block; margin-top: 10px;">${result.secondaryLinkText}</a>`;
+            }
+            
             const resultContent = `
                 <div class="result-icon">${result.icon}</div>
                 <h2>You Are: ${result.name}</h2>
@@ -587,8 +610,7 @@
                     <h3>${result.programme}</h3>
                     <p>${result.programmeDescription}</p>
                     <br>
-                    <button class="btn" style="background: white; color: #667eea;">Learn More About This Programme</button>
-                    <button class="btn" style="background: rgba(255,255,255,0.2); border: 2px solid white;">Download Brochure</button>
+                    ${buttonsHtml}
                 </div>
                 
                 <p><em>We've emailed your personalised result and programme details to ${userEmail}</em></p>
