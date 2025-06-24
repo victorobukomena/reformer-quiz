@@ -501,6 +501,34 @@
             }
         };
         
+        // Google Form submission function
+        function submitToGoogleForm(name, email, resultType, resultName) {
+            const formData = new FormData();
+            
+            // REPLACE THESE WITH YOUR ACTUAL ENTRY IDs FROM YOUR GOOGLE FORM
+            formData.append('entry.174679319', name);        // Replace with your Name field ID
+            formData.append('entry.219767595', email);       // Replace with your Email field ID  
+            formData.append('entry.1482561050', resultType);  // Replace with your Result Type field ID
+            formData.append('entry.557283907', resultName);  // Replace with your Result Name field ID
+            formData.append('entry.1510290091', new Date().toISOString()); // Replace with your Timestamp field ID
+            formData.append('entry.176890011', JSON.stringify(answers));   // Replace with your All Answers field ID (optional)
+            
+            // REPLACE WITH YOUR ACTUAL FORM ID FROM YOUR GOOGLE FORM
+            const formURL = 'https://docs.google.com/forms/d/e/12SbHFF4T9fESvbLRksx6XSyovNjStqaJ6yzntNWK9qE/formResponse';
+            
+            return fetch(formURL, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                console.log('Data submitted to Google Forms successfully');
+                return true;
+            }).catch(error => {
+                console.error('Error submitting to Google Forms:', error);
+                return false;
+            });
+        }
+        
         function startQuiz() {
             userName = document.getElementById('userName').value.trim();
             userEmail = document.getElementById('userEmail').value.trim();
@@ -586,6 +614,14 @@
             const resultType = calculateResult();
             const result = reformerTypes[resultType];
             
+            // Submit data to Google Form
+            submitToGoogleForm(userName, userEmail, resultType, result.name)
+                .then(success => {
+                    if (success) {
+                        console.log('Quiz data saved successfully!');
+                    }
+                });
+            
             document.getElementById('quizContainer').style.display = 'none';
             document.getElementById('results').classList.add('active');
             
@@ -613,7 +649,7 @@
                     ${buttonsHtml}
                 </div>
                 
-                <p><em>We've emailed your personalised result and programme details to ${userEmail}</em></p>
+                <p><em>Your results have been saved and we'll follow up at ${userEmail}</em></p>
             `;
             
             document.getElementById('resultContent').innerHTML = resultContent;
